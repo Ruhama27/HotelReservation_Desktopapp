@@ -27,29 +27,32 @@ namespace HotelReservation
             label7.Cursor = Cursors.Hand;
 
             label5.Click += Home_Click;
-            button3.Click += BookNow_Click;
-            label6.Click += BookNow_Click;
+            button3.Click += (s, e) => OpenReservation("Deluxe Room", 4200m);
+            label6.Click += (s, e) => OpenReservation("Standard Room", 3200m);
             button8.Click += CheckAvailability_Click;
 
-            Control[] roomBookButtons = new Control[]
-            {
-                button1, button2, button4, button5, button6, button7
-            };
+            // Wire each card's Book button with its corresponding room & rate
+            button1.Click += (s, e) => OpenReservation("Standard Room (1 Bed)", 3200m);
+            button2.Click += (s, e) => OpenReservation("Deluxe Room (1 Bed)", 4200m);
+            button4.Click += (s, e) => OpenReservation("Family Suite (3 Bed)", 7200m);
+            button5.Click += (s, e) => OpenReservation("Standard Room (1 Bed)", 3200m);
+            button6.Click += (s, e) => OpenReservation("Executive Suite", 4200m);
+            button7.Click += (s, e) => OpenReservation("Presidential Suite", 7200m);
+            button9.Click += (s, e) => OpenReservation("Deluxe Room", 4200m);
+        }
 
-            foreach (var btn in roomBookButtons)
-            {
-                if (btn != null)
-                {
-                    btn.Click += BookNow_Click;
-                }
-            }
+        private void OpenReservation(string roomType, decimal ratePerNight)
+        {
+            Form3 reservationForm = new Form3(roomType, ratePerNight);
+            this.Hide();
+            reservationForm.Show();
+            reservationForm.FormClosed += (s, args) => this.Show();
         }
 
         private void CenterContent()
         {
             int rightMargin = this.ClientSize.Width - 50;
 
-            // --- Safe Top Contact Bar (groupBox1) ---
             if (groupBox1 != null)
             {
                 Control lbl8 = groupBox1.Controls["label8"];
@@ -70,18 +73,15 @@ namespace HotelReservation
                 }
             }
 
-            // --- Header Nav Controls (groupBox2) ---
             button3.Left = rightMargin - button3.Width;
             label6.Left = button3.Left - 90;
             label7.Left = label6.Left - 130;
             label5.Left = label7.Left - 80;
 
-            // Center titles and availability panel
             label2.Left = (this.ClientSize.Width - label2.Width) / 2;
             label3.Left = (this.ClientSize.Width - label3.Width) / 2;
             panel1.Left = (this.ClientSize.Width - panel1.Width) / 2;
 
-            // Center room card columns evenly
             int cardWidth = 234;
             int totalBlockWidth = 3 * cardWidth + 2 * 120;
             int startX = Math.Max(40, (this.ClientSize.Width - totalBlockWidth) / 2);
@@ -163,14 +163,6 @@ namespace HotelReservation
             }
 
             this.Close();
-        }
-
-        private void BookNow_Click(object sender, EventArgs e)
-        {
-            Form3 reservationForm = new Form3();
-            this.Hide();
-            reservationForm.Show();
-            reservationForm.FormClosed += (s, args) => this.Show();
         }
 
         private void ApplyCustomCurvature()

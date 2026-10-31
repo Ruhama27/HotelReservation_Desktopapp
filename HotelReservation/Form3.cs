@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -7,17 +8,150 @@ namespace HotelReservation
 {
     public partial class Form3 : Form
     {
-        public Form3()
+        private string _selectedRoomType = "Deluxe Room";
+        private decimal _nightlyRate = 4200m;
+        private decimal _calculatedTotal = 4200m;
+
+        public Form3() : this("Deluxe Room", 4200m) { }
+
+        public Form3(string roomType, decimal nightlyRate)
         {
             InitializeComponent();
             this.AutoSize = false;
             this.WindowState = FormWindowState.Maximized;
 
+            _selectedRoomType = roomType;
+            _nightlyRate = nightlyRate;
+
             ApplyCustomCurvature();
             WireUpNavigation();
+            SetupBusinessLogic();
 
             this.Resize += (s, e) => CenterReservationContent();
             CenterReservationContent();
+        }
+
+        private void SetupBusinessLogic()
+        {
+            // Populate Guests Dropdown if empty
+            if (comboBox1.Items.Count == 0)
+            {
+                comboBox1.Items.AddRange(new object[] { "1 Guest", "2 Guests", "3 Guests", "4+ Guests" });
+                comboBox1.SelectedIndex = 0;
+            }
+
+            // Set default dates
+            dateTimePicker1.Value = DateTime.Today;
+            dateTimePicker2.Value = DateTime.Today.AddDays(1);
+
+            // Default payment choice
+            radioButton1.Checked = true;
+
+            // Wire recalculation triggers
+            dateTimePicker1.ValueChanged += (s, e) => RecalculateTotal();
+            dateTimePicker2.ValueChanged += (s, e) => RecalculateTotal();
+
+            CheckBox[] serviceChecks = new CheckBox[] { checkBox1, checkBox2, checkBox3, checkBox4, checkBox5 };
+            foreach (var chk in serviceChecks)
+            {
+                chk.CheckedChanged += (s, e) => RecalculateTotal();
+            }
+
+            // Confirm Booking Action
+            button1.Click += ConfirmBooking_Click;
+
+            RecalculateTotal();
+        }
+
+        private void RecalculateTotal()
+        {
+            int nights = (dateTimePicker2.Value.Date - dateTimePicker1.Value.Date).Days;
+            if (nights <= 0) nights = 1;
+
+            decimal roomTotal = nights * _nightlyRate;
+
+            // Each add-on service is 900 ETB
+            decimal servicesTotal = 0;
+            if (checkBox1.Checked) servicesTotal += 900m;
+            if (checkBox2.Checked) servicesTotal += 900m;
+            if (checkBox3.Checked) servicesTotal += 900m;
+            if (checkBox4.Checked) servicesTotal += 900m;
+            if (checkBox5.Checked) servicesTotal += 900m;
+
+            _calculatedTotal = roomTotal + servicesTotal;
+
+            // Update badge text to show total
+            label22.Text = $"{_calculatedTotal:N0} ETB ({nights}n)";
+        }
+
+        private void ConfirmBooking_Click(object sender, EventArgs e)
+        {
+            // 1. Input Validation
+            string guestName = textBox1.Text.Trim();
+            string phone = textBox2.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(guestName))
+            {
+                MessageBox.Show("Please enter the guest's full name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBox1.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(phone))
+            {
+                MessageBox.Show("Please enter a valid contact phone number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBox2.Focus();
+                return;
+            }
+
+            if (dateTimePicker2.Value.Date <= dateTimePicker1.Value.Date)
+            {
+                MessageBox.Show("Check-out date must be after the check-in date.", "Date Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dateTimePicker2.Focus();
+                return;
+            }
+
+            // 2. Determine Payment Method
+            string paymentMethod = "CBE";
+            if (radioButton2.Checked) paymentMethod = "Telebirr";
+            else if (radioButton3.Checked) paymentMethod = "Others";
+
+            // 3. Collect Add-on Services
+            List<string> selectedServices = new List<string>();
+            if (checkBox1.Checked) selectedServices.Add("Restaurant");
+            if (checkBox2.Checked) selectedServices.Add("Laundry");
+            if (checkBox3.Checked) selectedServices.Add("Spa");
+            if (checkBox4.Checked) selectedServices.Add("Airport Pickup");
+            if (checkBox5.Checked) selectedServices.Add("Gym");
+
+            // 4. Create and Save Reservation into In-Memory DataStore
+            Reservation newBooking = new Reservation
+            {
+                GuestName = guestName,
+                PhoneNumber = phone,
+                RoomType = _selectedRoomType,
+                RoomNumber = DataStore.AssignRandomRoomNumber(_selectedRoomType),
+                CheckIn = dateTimePicker1.Value.Date,
+                CheckOut = dateTimePicker2.Value.Date,
+                TotalPrice = _calculatedTotal,
+                PaymentMethod = paymentMethod,
+                PaymentStatus = "Paid",
+                Services = selectedServices
+            };
+
+            DataStore.Reservations.Insert(0, newBooking);
+
+            MessageBox.Show(
+                $"Reservation successfully confirmed!\n\nGuest: {newBooking.GuestName}\nRoom: #{newBooking.RoomNumber} ({newBooking.RoomType})\nTotal: {newBooking.TotalPrice:N0} ETB\nPayment: {newBooking.PaymentMethod}",
+                "Booking Confirmed",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+
+            // Navigate to Dashboard
+            Form4 dashboard = new Form4();
+            this.Hide();
+            dashboard.Show();
+            dashboard.FormClosed += (s, args) => this.Close();
         }
 
         private void WireUpNavigation()
@@ -34,7 +168,6 @@ namespace HotelReservation
         {
             int rightMargin = this.ClientSize.Width - 50;
 
-            // --- Safe Top Contact Bar (groupBox1) ---
             if (groupBox1 != null)
             {
                 Control lbl8 = groupBox1.Controls["label8"];
@@ -55,25 +188,20 @@ namespace HotelReservation
                 }
             }
 
-            // --- Main Header Navigation (groupBox2) ---
             label6.Left = rightMargin - label6.Width;
             label7.Left = label6.Left - label7.Width - 30;
             label5.Left = label7.Left - label5.Width - 30;
 
-            // Center header banner title
             label2.Left = (this.ClientSize.Width - label2.Width) / 2;
 
-            // --- Main Content Columns ---
             int totalBlockWidth = panel1.Width + 40 + groupBox6.Width;
             int startX = Math.Max(30, (this.ClientSize.Width - totalBlockWidth) / 2);
             int rightColumnX = startX + panel1.Width + 40;
 
-            // Left Column
             panel1.Left = startX;
             panel2.Left = startX;
             panel7.Left = startX;
 
-            // Right Column
             groupBox6.Left = rightColumnX;
             groupBox5.Left = rightColumnX;
             panel9.Left = rightColumnX;
