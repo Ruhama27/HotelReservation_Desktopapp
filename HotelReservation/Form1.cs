@@ -7,12 +7,15 @@ namespace HotelReservation
 {
     public partial class Home : Form
     {
+        private Label lblDashboard;
+
         public Home()
         {
             InitializeComponent();
             this.AutoSize = false;
             this.WindowState = FormWindowState.Maximized;
 
+            SetupDashboardHeaderLink();
             ApplyRoundedCorners();
             WireUpNavigation();
             SetupResponsiveness();
@@ -20,18 +23,37 @@ namespace HotelReservation
             this.Resize += (s, e) => AdjustLayout();
         }
 
+        private void SetupDashboardHeaderLink()
+        {
+            lblDashboard = new Label
+            {
+                Text = "Dashboard",
+                Font = new Font("Georgia", 10F, FontStyle.Regular),
+                ForeColor = Color.FromArgb(61, 42, 48),
+                AutoSize = true,
+                Cursor = Cursors.Hand
+            };
+
+            lblDashboard.Click += (s, e) =>
+            {
+                Form4 dashboard = new Form4();
+                this.Hide();
+                dashboard.Show();
+                dashboard.FormClosed += (senderObj, args) => this.Show();
+            };
+
+            groupBox2.Controls.Add(lblDashboard);
+        }
+
         private void SetupResponsiveness()
         {
-            // Dock hero section to fill remaining height
             groupBox3.Dock = DockStyle.Fill;
 
-            // Anchor top-right navigation elements
             button3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 
-            // Anchor hero text and button to bottom-left of hero container
             label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -42,14 +64,26 @@ namespace HotelReservation
 
         private void AdjustLayout()
         {
-            // Header navigation buttons
             int rightMargin = this.ClientSize.Width - 40;
-            button3.Left = rightMargin - button3.Width;
-            label6.Left = button3.Left - 90;
-            label7.Left = label6.Left - 130;
-            label5.Left = label7.Left - 80;
 
-            // Safe lookup for footer contacts inside groupBox1
+            // Header navigation: Home -> Rooms and Suites -> Services -> Dashboard -> Book Now
+            button3.Left = rightMargin - button3.Width;
+
+            if (lblDashboard != null)
+            {
+                lblDashboard.Left = button3.Left - 105;
+                lblDashboard.Top = label6.Top;
+                label6.Left = lblDashboard.Left - 85;
+            }
+            else
+            {
+                label6.Left = button3.Left - 90;
+            }
+
+            label7.Left = label6.Left - 140;
+            label5.Left = label7.Left - 75;
+
+            // Safe lookup for footer contacts
             if (groupBox1 != null)
             {
                 Control lbl8 = groupBox1.Controls["label8"];
