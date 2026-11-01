@@ -150,12 +150,16 @@ namespace HotelReservation
             gridArrivals.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(247, 243, 240);
             gridArrivals.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(61, 42, 48);
             gridArrivals.ColumnHeadersDefaultCellStyle.Font = new Font("Georgia", 9.5f, FontStyle.Bold);
+            gridArrivals.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(247, 243, 240);
+            gridArrivals.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(61, 42, 48);
             gridArrivals.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            gridArrivals.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            gridArrivals.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
             gridArrivals.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
 
             gridArrivals.DefaultCellStyle.BackColor = Color.White;
             gridArrivals.DefaultCellStyle.ForeColor = Color.FromArgb(50, 50, 50);
+            gridArrivals.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            gridArrivals.DefaultCellStyle.Padding = new Padding(6, 0, 6, 0);
             gridArrivals.DefaultCellStyle.SelectionBackColor = Color.FromArgb(245, 230, 225);
             gridArrivals.DefaultCellStyle.SelectionForeColor = Color.FromArgb(122, 31, 62);
             gridArrivals.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(253, 251, 250);
@@ -164,27 +168,27 @@ namespace HotelReservation
             gridArrivals.Columns.Add("Room", "Room #");
             gridArrivals.Columns.Add("Total", "Total (ETB)");
             gridArrivals.Columns.Add("Method", "Method");
-            gridArrivals.Columns.Add("TxnRef", "Receipt / Ref ID");
-            // Keep headers short enough to remain readable at smaller window sizes.
+            gridArrivals.Columns.Add("TxnRef", "Receipt / Ref");
             gridArrivals.Columns.Add("PaymentStatus", "Payment");
             gridArrivals.Columns.Add("StayStatus", "Stay");
 
-            // Use proportional widths so no column is squeezed into clipped text.
+            // Use fill weights instead of fixed widths so every heading remains
+            // readable at both normal and maximized window sizes.
             gridArrivals.Columns["Guest"].FillWeight = 1.35f;
-            gridArrivals.Columns["Room"].FillWeight = 0.70f;
-            gridArrivals.Columns["Total"].FillWeight = 0.95f;
+            gridArrivals.Columns["Room"].FillWeight = 0.75f;
+            gridArrivals.Columns["Total"].FillWeight = 1.0f;
             gridArrivals.Columns["Method"].FillWeight = 1.05f;
-            gridArrivals.Columns["TxnRef"].FillWeight = 1.35f;
-            gridArrivals.Columns["PaymentStatus"].FillWeight = 1.10f;
+            gridArrivals.Columns["TxnRef"].FillWeight = 1.25f;
+            gridArrivals.Columns["PaymentStatus"].FillWeight = 1.15f;
             gridArrivals.Columns["StayStatus"].FillWeight = 0.75f;
 
-            gridArrivals.Columns["Guest"].MinimumWidth = 105;
-            gridArrivals.Columns["Room"].MinimumWidth = 58;
-            gridArrivals.Columns["Total"].MinimumWidth = 78;
-            gridArrivals.Columns["Method"].MinimumWidth = 82;
-            gridArrivals.Columns["TxnRef"].MinimumWidth = 105;
-            gridArrivals.Columns["PaymentStatus"].MinimumWidth = 82;
-            gridArrivals.Columns["StayStatus"].MinimumWidth = 58;
+            gridArrivals.Columns["Guest"].MinimumWidth = 115;
+            gridArrivals.Columns["Room"].MinimumWidth = 70;
+            gridArrivals.Columns["Total"].MinimumWidth = 95;
+            gridArrivals.Columns["Method"].MinimumWidth = 95;
+            gridArrivals.Columns["TxnRef"].MinimumWidth = 120;
+            gridArrivals.Columns["PaymentStatus"].MinimumWidth = 90;
+            gridArrivals.Columns["StayStatus"].MinimumWidth = 70;
 
             gridArrivals.CellFormatting += GridArrivals_CellFormatting;
 
@@ -436,9 +440,7 @@ namespace HotelReservation
 
             foreach (var r in list)
             {
-                string paymentStatus = r.PaymentStatus.Contains("Paid") ? "Paid" :
-                                        r.PaymentStatus.Contains("Pending") ? "Pending" : "Rejected";
-                gridArrivals.Rows.Add(r.GuestName, r.RoomNumber, $"{r.TotalPrice:N0}", r.PaymentMethod, r.TransactionRef, paymentStatus, r.StayStatus);
+                gridArrivals.Rows.Add(r.GuestName, r.RoomNumber, $"{r.TotalPrice:N0}", r.PaymentMethod, r.TransactionRef, r.PaymentStatus, r.StayStatus);
             }
         }
 

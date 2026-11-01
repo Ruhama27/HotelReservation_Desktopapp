@@ -51,10 +51,7 @@ namespace HotelReservation
 
             lblDashboard.Click += (s, e) =>
             {
-                Form4 dashboard = new Form4();
-                this.Hide();
-                dashboard.Show();
-                dashboard.FormClosed += (senderObj, args) => this.Show();
+                AdminLoginForm.OpenDashboard(this);
             };
 
             groupBox2.Controls.Add(lblDashboard);

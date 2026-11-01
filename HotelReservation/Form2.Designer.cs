@@ -604,9 +604,9 @@
             this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(42)))), ((int)(((byte)(48)))));
             this.label13.Location = new System.Drawing.Point(6, 54);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(41, 17);
+            this.label13.Size = new System.Drawing.Size(42, 17);
             this.label13.TabIndex = 41;
-            this.label13.Text = "1 bed";
+            this.label13.Text = "2 bed";
             // 
             // panel2
             // 
@@ -678,7 +678,7 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(112, 20);
             this.label15.TabIndex = 10;
-            this.label15.Text = "4200/night";
+            this.label15.Text = "3200/night";
             // 
             // groupBox5
             // 
@@ -700,7 +700,7 @@
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(42, 17);
             this.label16.TabIndex = 42;
-            this.label16.Text = "42ms";
+            this.label16.Text = "32ms";
             // 
             // label20
             // 
@@ -784,9 +784,9 @@
             this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(42)))), ((int)(((byte)(48)))));
             this.label18.Location = new System.Drawing.Point(174, 54);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(51, 17);
+            this.label18.Size = new System.Drawing.Size(42, 17);
             this.label18.TabIndex = 42;
-            this.label18.Text = "100ms";
+            this.label18.Text = "42ms";
             // 
             // label21
             // 
@@ -795,9 +795,9 @@
             this.label21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(42)))), ((int)(((byte)(48)))));
             this.label21.Location = new System.Drawing.Point(6, 54);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(42, 17);
+            this.label21.Size = new System.Drawing.Size(41, 17);
             this.label21.TabIndex = 41;
-            this.label21.Text = "3 bed";
+            this.label21.Text = "1 bed";
             // 
             // groupBox12
             // 
@@ -848,9 +848,9 @@
             this.label22.ForeColor = System.Drawing.Color.White;
             this.label22.Location = new System.Drawing.Point(39, 7);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(112, 20);
+            this.label22.Size = new System.Drawing.Size(113, 20);
             this.label22.TabIndex = 10;
-            this.label22.Text = "3200/night";
+            this.label22.Text = "3800/night";
             // 
             // groupBox7
             // 
@@ -872,7 +872,7 @@
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(42, 17);
             this.label23.TabIndex = 42;
-            this.label23.Text = "32ms";
+            this.label23.Text = "42ms";
             // 
             // label24
             // 
@@ -881,9 +881,9 @@
             this.label24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(42)))), ((int)(((byte)(48)))));
             this.label24.Location = new System.Drawing.Point(6, 54);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(41, 17);
+            this.label24.Size = new System.Drawing.Size(42, 17);
             this.label24.TabIndex = 41;
-            this.label24.Text = "1 bed";
+            this.label24.Text = "2 bed";
             // 
             // groupBox13
             // 
@@ -1033,9 +1033,9 @@
             this.label31.ForeColor = System.Drawing.Color.White;
             this.label31.Location = new System.Drawing.Point(39, 7);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(112, 20);
+            this.label31.Size = new System.Drawing.Size(111, 20);
             this.label31.TabIndex = 10;
-            this.label31.Text = "3200/night";
+            this.label31.Text = "7200/night";
             // 
             // groupBox9
             // 
@@ -1057,7 +1057,7 @@
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(42, 17);
             this.label32.TabIndex = 42;
-            this.label32.Text = "32ms";
+            this.label32.Text = "62ms";
             // 
             // label33
             // 
@@ -1066,9 +1066,9 @@
             this.label33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(42)))), ((int)(((byte)(48)))));
             this.label33.Location = new System.Drawing.Point(6, 54);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(41, 17);
+            this.label33.Size = new System.Drawing.Size(42, 17);
             this.label33.TabIndex = 41;
-            this.label33.Text = "1 bed";
+            this.label33.Text = "2 bed";
             // 
             // groupBox15
             // 
@@ -1083,7 +1083,7 @@
             // panel14
             // 
             this.panel14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(123)))), ((int)(((byte)(46)))));
-            this.panel14.Location = new System.Drawing.Point(1310, 1343);
+            this.panel14.Location = new System.Drawing.Point(1358, 1343);
             this.panel14.Name = "panel14";
             this.panel14.Size = new System.Drawing.Size(234, 4);
             this.panel14.TabIndex = 71;
@@ -1095,7 +1095,7 @@
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button10.Font = new System.Drawing.Font("Georgia", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(42)))), ((int)(((byte)(48)))));
-            this.button10.Location = new System.Drawing.Point(1248, 1271);
+            this.button10.Location = new System.Drawing.Point(1296, 1271);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(101, 52);
             this.button10.TabIndex = 67;
@@ -1106,7 +1106,7 @@
             // 
             this.panel15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(31)))), ((int)(((byte)(62)))));
             this.panel15.Controls.Add(this.label34);
-            this.panel15.Location = new System.Drawing.Point(1344, 1281);
+            this.panel15.Location = new System.Drawing.Point(1392, 1281);
             this.panel15.Name = "panel15";
             this.panel15.Size = new System.Drawing.Size(200, 32);
             this.panel15.TabIndex = 70;
@@ -1128,7 +1128,7 @@
             this.groupBox17.BackColor = System.Drawing.Color.White;
             this.groupBox17.Controls.Add(this.label35);
             this.groupBox17.Controls.Add(this.label36);
-            this.groupBox17.Location = new System.Drawing.Point(1310, 1309);
+            this.groupBox17.Location = new System.Drawing.Point(1358, 1309);
             this.groupBox17.Name = "groupBox17";
             this.groupBox17.Size = new System.Drawing.Size(234, 74);
             this.groupBox17.TabIndex = 69;
@@ -1160,7 +1160,7 @@
             // 
             this.groupBox18.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox18.BackgroundImage")));
             this.groupBox18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.groupBox18.Location = new System.Drawing.Point(1310, 1086);
+            this.groupBox18.Location = new System.Drawing.Point(1358, 1086);
             this.groupBox18.Name = "groupBox18";
             this.groupBox18.Size = new System.Drawing.Size(234, 200);
             this.groupBox18.TabIndex = 68;
@@ -1463,9 +1463,9 @@
             this.label46.ForeColor = System.Drawing.Color.White;
             this.label46.Location = new System.Drawing.Point(39, 7);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(111, 20);
+            this.label46.Size = new System.Drawing.Size(112, 20);
             this.label46.TabIndex = 10;
-            this.label46.Text = "7200/night";
+            this.label46.Text = "3200/night";
             // 
             // groupBox25
             // 
@@ -1496,9 +1496,9 @@
             this.label48.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(42)))), ((int)(((byte)(48)))));
             this.label48.Location = new System.Drawing.Point(6, 54);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(42, 17);
+            this.label48.Size = new System.Drawing.Size(41, 17);
             this.label48.TabIndex = 41;
-            this.label48.Text = "3 bed";
+            this.label48.Text = "1 bed";
             // 
             // groupBox26
             // 

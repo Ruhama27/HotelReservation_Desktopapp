@@ -53,6 +53,47 @@ A modern, responsive desktop hotel reservation and front-desk management system 
 
 ---
 
+## 📋 Business Rules
+
+### Room Availability
+
+- Only rooms with an `Available` status can be assigned to a new reservation.
+- The requested room type is matched before another available room is considered.
+- When a reservation is confirmed, the assigned room becomes `Occupied`.
+- A checked-out room becomes `Cleaning` until an administrator releases it.
+- Cleaning staff or an administrator can return a cleaned room to `Available` status.
+
+### Reservations
+
+- A reservation must include the guest's full name and phone number.
+- The check-out date must be later than the check-in date.
+- Each reservation is assigned a room and contains its room type, dates, guest details, and total price.
+- The total price is calculated from the nightly room rate, number of nights, and selected services.
+- A reservation cannot be confirmed when no room is available.
+
+### Additional Services
+
+- Guests may select restaurant meals, laundry, spa, airport pickup, and gym services.
+- Each selected service adds its applicable fee to the reservation total.
+- Service selections are recalculated whenever they are changed.
+
+### Payments
+
+- Supported payment channels include CBE, Telebirr, and other payment methods.
+- A payment reference or receipt code is required before a reservation can be submitted.
+- New reservations have a `Pending Verification` payment status.
+- Administrators can verify or reject reservation payments from the dashboard.
+
+### Dashboard Management
+
+- Administrators can view reservation arrivals, room availability, and pending payments.
+- Administrators can search the reservations table by guest, room, or transaction reference.
+- An active guest can be checked out only after selecting the reservation.
+- Checking out a guest changes the reservation status to `Departed` and the room status to `Cleaning`.
+- Reservation data is stored in memory and is reset when the application closes.
+
+---
+
 ## 🛠️ Technology Stack
 
 - **Language:** C#
