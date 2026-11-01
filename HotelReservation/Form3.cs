@@ -256,10 +256,10 @@ namespace HotelReservation
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
 
-            Form4 dashboard = new Form4();
-            this.Hide();
-            dashboard.Show();
-            dashboard.FormClosed += (s, args) => this.Close();
+            // Return to the screen that opened the reservation form. The
+            // administrator dashboard is available only through its protected
+            // Dashboard navigation link.
+            this.Close();
         }
 
         private void WireUpNavigation()
