@@ -36,6 +36,13 @@ namespace HotelReservation
         public string StayStatus { get; set; } = "Active"; // "Active", "Departed"
     }
 
+    public class HotelService
+    {
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public bool IsAvailable { get; set; } = true;
+    }
+
     public static class DataStore
     {
         public static List<Room> Rooms { get; set; } = new List<Room>()
@@ -62,6 +69,15 @@ namespace HotelReservation
             new Room { RoomNumber = "304", RoomType = "Executive Suite", NightlyRate = 7200, Status = RoomStatus.Available },
             new Room { RoomNumber = "305", RoomType = "Executive Suite", NightlyRate = 7200, Status = RoomStatus.Cleaning },
             new Room { RoomNumber = "306", RoomType = "Executive Suite", NightlyRate = 7200, Status = RoomStatus.Available }
+        };
+
+        public static List<HotelService> Services { get; set; } = new List<HotelService>()
+        {
+            new HotelService { Name = "Restaurant meals", Price = 900m },
+            new HotelService { Name = "Laundry", Price = 500m },
+            new HotelService { Name = "Spa", Price = 1200m },
+            new HotelService { Name = "Airport pickup", Price = 1000m },
+            new HotelService { Name = "Gym", Price = 300m }
         };
 
         public static List<Reservation> Reservations { get; set; } = new List<Reservation>()

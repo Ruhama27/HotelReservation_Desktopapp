@@ -146,6 +146,19 @@ namespace HotelReservation
             checkBox1.Text = "Restaurant meals";
             checkBox2.Text = "Laundry";
 
+            // Read service prices from the shared admin-managed service list.
+            label14.Text = $"{DataStore.Services[0].Price:N0} ETB";
+            label15.Text = $"{DataStore.Services[1].Price:N0} ETB";
+            label16.Text = $"{DataStore.Services[2].Price:N0} ETB";
+            label17.Text = $"{DataStore.Services[3].Price:N0} ETB";
+            label18.Text = $"{DataStore.Services[4].Price:N0} ETB";
+
+            checkBox1.Enabled = DataStore.Services[0].IsAvailable;
+            checkBox2.Enabled = DataStore.Services[1].IsAvailable;
+            checkBox3.Enabled = DataStore.Services[2].IsAvailable;
+            checkBox4.Enabled = DataStore.Services[3].IsAvailable;
+            checkBox5.Enabled = DataStore.Services[4].IsAvailable;
+
             // Replace the legacy designer entries ("Guste") with the labels
             // used by the current reservation interface.
             comboBox1.Items.Clear();
@@ -178,11 +191,11 @@ namespace HotelReservation
             decimal roomTotal = nights * _nightlyRate;
 
             decimal servicesTotal = 0;
-            if (checkBox1.Checked) servicesTotal += 900m;
-            if (checkBox2.Checked) servicesTotal += 900m;
-            if (checkBox3.Checked) servicesTotal += 900m;
-            if (checkBox4.Checked) servicesTotal += 900m;
-            if (checkBox5.Checked) servicesTotal += 900m;
+            if (checkBox1.Checked) servicesTotal += DataStore.Services[0].Price;
+            if (checkBox2.Checked) servicesTotal += DataStore.Services[1].Price;
+            if (checkBox3.Checked) servicesTotal += DataStore.Services[2].Price;
+            if (checkBox4.Checked) servicesTotal += DataStore.Services[3].Price;
+            if (checkBox5.Checked) servicesTotal += DataStore.Services[4].Price;
 
             _calculatedTotal = roomTotal + servicesTotal;
             label22.Text = $"{_calculatedTotal:N0} ETB ({nights}n)";

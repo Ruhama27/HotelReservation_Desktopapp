@@ -18,6 +18,7 @@ namespace HotelReservation
         private ComboBox cmbCleaningRooms;
         private Button btnReleaseToBusiness;
         private Label lblCleaningSummary;
+        private Button btnManageRooms;
 
         public Form4()
         {
@@ -29,6 +30,7 @@ namespace HotelReservation
             SetupDashboardResponsiveness();
             SetupPolishedArrivalsTable();
             SetupAdminRoomReleaseControls();
+            SetupManageRoomsButton();
             ApplyRoundedInterface();
             RefreshDashboardData();
 
@@ -334,6 +336,31 @@ namespace HotelReservation
             btnReleaseToBusiness.FlatAppearance.BorderSize = 0;
             btnReleaseToBusiness.Click += BtnReleaseToBusiness_Click;
             groupBox5.Controls.Add(btnReleaseToBusiness);
+        }
+
+        private void SetupManageRoomsButton()
+        {
+            btnManageRooms = new Button
+            {
+                Text = "Manage Rooms",
+                Location = new Point(28, 555),
+                Size = new Size(225, 38),
+                BackColor = Color.FromArgb(185, 123, 46),
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Font = new Font("Georgia", 9f, FontStyle.Bold),
+                Cursor = Cursors.Hand
+            };
+            btnManageRooms.FlatAppearance.BorderSize = 0;
+            btnManageRooms.Click += (s, e) =>
+            {
+                using (Form6 roomManager = new Form6())
+                {
+                    roomManager.ShowDialog(this);
+                }
+                RefreshDashboardData();
+            };
+            groupBox1.Controls.Add(btnManageRooms);
         }
 
         private void ApplyRoundedInterface()
